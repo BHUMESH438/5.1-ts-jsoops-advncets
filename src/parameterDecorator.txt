@@ -1,0 +1,29 @@
+function Paramerterdecorator(classprototype: Object, method: string, index: number) {
+  console.log(classprototype);
+  console.log(method);
+  console.log(index);
+}
+class Airplane {
+  constructor(public _aircraftName: string) {}
+
+  public static se(): void {
+    //static decorator and fn
+    console.log('150');
+  }
+
+  public pilotName(@Paramerterdecorator name: string) {
+    console.log(`${name}`);
+  }
+
+  public get aircraftModel() {
+    return this._aircraftName;
+  }
+}
+
+const airplane = new Airplane('Airbus 230');
+console.log(airplane);
+airplane.pilotName('jon');
+// airplane.aircraftModel;
+// airplane.se;
+
+//the decorators(parameter) - give the class prototype,index/position in parameters,method name of which that is applied

@@ -1,0 +1,79 @@
+enum Manufacturers {
+  boieng = 'boeing',
+  airbus = 'airbus'
+}
+
+interface Aircraft {
+  _aircraftName: string;
+  prototype?: any;
+  origin?: string;
+  manufacturers?: string;
+  type?: string;
+  boiengMethod?: () => void;
+  airbusMethod?: () => void;
+  pilotName?(): void;
+}
+
+///factory function  or decorators
+//adding prototype dierectly to the parent class through the factory function
+function AircraftManufacturers(manufacturers: Manufacturers) {
+  return (target: Function) => {
+    // console.log('>>>>>>>>>>>>', manufacturers);
+    // console.log('>>>>>>>>>>>>', target);
+
+    if (manufacturers === Manufacturers.boieng) {
+      target.prototype.origin = 'france';
+      target.prototype.manufacturers = Manufacturers.boieng;
+      target.prototype.type = 'Helicaopter';
+      target.prototype.boiengMethod = () => {
+        console.log('boeing method');
+      };
+    } else {
+      // console.log('>>>>>>>>>>>>', manufacturers);
+      target.prototype.origin = 'USA';
+      target.prototype.manufacturers = Manufacturers.airbus;
+      target.prototype.type = 'Aircraft';
+      target.prototype.airbusMethod = () => {
+        console.log('airbus method');
+      };
+    }
+  };
+}
+
+// function FirstDeco(target: Function) {
+//   console.log('invoked>>>>>', target);
+// }
+
+// @FirstDeco
+@AircraftManufacturers(Manufacturers.airbus)
+class Airplane implements Aircraft {
+  constructor(public _aircraftName: string, private pilot: string) {}
+  public pilotName() {
+    console.log(this.pilot);
+  }
+  public get aircraftModel() {
+    return this._aircraftName;
+  }
+}
+
+const airplane: Aircraft = new Airplane('Airbus 230', 'john');
+
+console.log(airplane);
+
+airplane.airbusMethod ? airplane.airbusMethod() : console.log('did not exist');
+//@ts-ignore-js keep going through the prototypal chian to find the specified property - this problem occurs as ts doesnt know because we are not defined within the class instead we are adding the properties to the prototypes funciton through the decrators. - to solve this issue in the ts we can use interfaces
+
+@AircraftManufacturers(Manufacturers.boieng)
+class Helicopter implements Aircraft {
+  constructor(public _aircraftName: string, private pilot: string) {}
+  public pilotName() {
+    console.log(this.pilot);
+  }
+  public get aircraftName() {
+    return this._aircraftName;
+  }
+}
+
+const helicopter: Aircraft = new Helicopter('me234', 'mark');
+console.log(helicopter);
+helicopter.boiengMethod ? helicopter.boiengMethod() : console.log('false');

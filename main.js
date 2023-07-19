@@ -1,4 +1,4 @@
-console.log(`hi im from main js`);
+// console.log(`hi im from main js`);
 //method->object
 //function->wind0w
 //---------------------this inside the obj
@@ -91,7 +91,7 @@ User1.prototype.login = function () {
   console.log(this.name);
 };
 const user2 = new User1('bhumesh', 'bhuemsh@gamail.com');
-console.log(user2);
+// console.log(user2);
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //property descriptors
 /*four types of property descriptors
@@ -105,7 +105,7 @@ const book3 = {
   pages: 300
 }; //obj literal
 
-console.log(Object.getOwnPropertyDescriptors(book3));
+// console.log(Object.getOwnPropertyDescriptors(book3));
 
 //define property method-------------------------------------------------------------------------------------------------
 const book4 = new Object();
@@ -117,12 +117,12 @@ Object.defineProperty(book4, 'title', {
   enumerable: true
 });
 
-console.log(book4);
+// console.log(book4);
 
 book4.title = 'Book';
 
-console.log(book4);
+// console.log(book4);
 
 Object.defineProperty(book4, 'author', { value: true, writable: true, configurable: true, enumerable: true });
 book4.author = 'mark';
-console.log(book4);
+// console.log(book4);

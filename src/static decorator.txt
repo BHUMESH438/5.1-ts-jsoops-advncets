@@ -1,0 +1,46 @@
+enum Manufacturers {
+  boieng = 'boeing',
+  airbus = 'airbus'
+}
+
+interface Aircraft {
+  _aircraftName: string;
+  prototype?: any;
+  origin?: string;
+  manufacturers?: string;
+  type?: string;
+  se?: () => void;
+  // pilotName?: () => void;
+  boiengMethod?: () => void;
+  airbusMethod?: () => void;
+  aircraftModel: string;
+}
+
+function StaticMethodDecorator(aas: Object, bas: string, cas: PropertyDescriptor) {
+  console.log('class prototype++++>>>>>', aas);
+  console.log('method name++++>>>>>', bas);
+  console.log('property descriptor++++>>>>>', cas);
+}
+
+class Airplane implements Aircraft {
+  constructor(public _aircraftName: string, private pilot: string) {}
+  @StaticMethodDecorator
+  public static se(): void {
+    //static decorator and fn
+    console.log('150');
+  }
+
+  public pilotName() {
+    console.log(this.pilot);
+  }
+
+  public get aircraftModel() {
+    return this._aircraftName;
+  }
+}
+
+const airplane: Aircraft = new Airplane('Airbus 230', 'john');
+// console.log(airplane);
+// airplane.pilotName();
+// airplane.aircraftModel;
+airplane.se;

@@ -1,0 +1,48 @@
+enum Manufacturers {
+  boieng = 'boeing',
+  airbus = 'airbus'
+}
+
+interface Aircraft {
+  _aircraftName: string;
+  prototype?: any;
+  origin?: string;
+  manufacturers?: string;
+  type?: string;
+  se?: () => void;
+  // pilotName?: () => void;
+  boiengMethod?: () => void;
+  airbusMethod?: () => void;
+  aircraftModel: string;
+}
+
+function firstdeco(name: string) {
+  return function (taarget: Function) {
+    console.log(taarget);
+    console.log(`${name}`);
+  };
+}
+
+@firstdeco('first') //passing the arg inside the dec fn along by the encapsulating the dec fun by a fun with the return val
+class Airplane implements Aircraft {
+  constructor(public _aircraftName: string, private pilot: string) {}
+
+  public static se(): void {
+    //static decorator and fn
+    console.log('150');
+  }
+
+  public pilotName() {
+    console.log(this.pilot);
+  }
+
+  public get aircraftModel() {
+    return this._aircraftName;
+  }
+}
+
+const airplane: Aircraft = new Airplane('Airbus 230', 'john');
+// console.log(airplane);
+// airplane.pilotName();
+// airplane.aircraftModel;
+airplane.se;

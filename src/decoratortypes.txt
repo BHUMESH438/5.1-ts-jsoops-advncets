@@ -1,0 +1,57 @@
+//parameter decorator - applied to the parameter
+function classDecorators(constructorOftheclass: Object) {
+  console.log(constructorOftheclass);
+}
+
+//accessor decorator - applied to the accessor
+function accessordecorator(classprototype: Object, method: string, propertydescriptors: PropertyDescriptor) {
+  console.log(classprototype);
+  console.log(method);
+  console.log(propertydescriptors);
+}
+
+//property decorator - applied to the property
+function Propertydecorator(classprototype: Object, method: string) {
+  console.log(classprototype);
+  console.log(method);
+}
+
+//parameter decorator - applied to the parameter
+function Paramerterdecorator(classprototype: Object, method: string, index: number) {
+  console.log(classprototype);
+  console.log(method);
+  console.log(index);
+}
+
+@classDecorators
+class Airplane {
+  @Propertydecorator //parameter
+  public _aircraftName: string; //declare the parameter before the constuctor function
+  constructor(_aircraftName: string) {
+    this._aircraftName = _aircraftName; //set the property to the passed parameters
+  }
+
+  public static se(): void {
+    //static decorator and fn
+    console.log('150');
+  }
+
+  //passing the accessor and parameter property
+  @accessordecorator public pilotName(@Paramerterdecorator name: string) {
+    console.log(`${name}`);
+  }
+
+  //getters
+  public get aircraftModel() {
+    return this._aircraftName;
+  }
+}
+
+const airplane = new Airplane('Airbus 230');
+console.log(airplane);
+airplane.pilotName('jon'); //passing the parameter through the methods
+
+// airplane.aircraftModel;
+// airplane.se;
+
+//the decorators(parameter) - give the class prototype,index/position in parameters,method name of which that is applied
