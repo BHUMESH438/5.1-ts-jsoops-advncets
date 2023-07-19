@@ -35,5 +35,3 @@ class Person {
 const person: Person = new Person('jon', 32);
 console.log(person);
 //therfore by doing the above logic we changed the constructor function of the class and give the new constructor function
-let x = 'y';
-const y = 'x';
