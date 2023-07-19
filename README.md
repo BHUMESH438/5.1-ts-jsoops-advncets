@@ -6,3 +6,4 @@
 - ## subtypes and supertyps
 - why sub and super types
 - why ts checks compatability
+- typewideing
